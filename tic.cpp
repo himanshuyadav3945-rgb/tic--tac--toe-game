@@ -155,16 +155,20 @@ int main() {
                        "Access-Control-Allow-Methods: GET, POST, OPTIONS\r\n"
                        "Access-Control-Allow-Headers: Content-Type\r\n"
                        "Connection: close\r\n\r\n";
-        } 
-        else if (request.find("GET /state") == 0) {
+        } else if (request.find("GET /state") == 0) {
+        
             // Fixed: Removed resetGame() here so fetching state doesn't wipe the board
             response = buildJSONResponse();
         } 
-        else if (request.find("POST /reset") == 0) {
-            resetGame();
+        // else if (request.find("POST /reset") == 0) {
+        else if (request.find("POST /reset") == 0 || request.find("GET /reset") == 0) {
+   
+        resetGame();
             response = buildJSONResponse();
         } 
-        else if (request.find("POST /move") == 0) {
+        // else if (request.find("POST /move") == 0) {
+        else if (request.find("POST /move") == 0 || request.find("GET /move") == 0) {
+
             size_t pos = request.find("index=");
             if (pos != string::npos && gameActive && (pos + 6 < request.length())) {
                 int index = request[pos + 6] - '0';
