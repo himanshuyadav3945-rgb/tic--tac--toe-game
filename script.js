@@ -11,7 +11,7 @@ const modalSubtitle = document.getElementById('modal-subtitle');
 const modalPlayAgain = document.getElementById('modal-play-again');
 
 // Change to 'http://localhost:8080' if your C++ server runs on port 8080
-const serverUrl = 'http://localhost:8081';
+const serverUrl = 'https://tic-tac-toe-game-t8wg.onrender.com';
 
 async function updateBoard() {
   try {
