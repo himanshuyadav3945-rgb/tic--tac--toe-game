@@ -10,7 +10,7 @@ const modalTitle = document.getElementById('modal-title');
 const modalSubtitle = document.getElementById('modal-subtitle');
 const modalPlayAgain = document.getElementById('modal-play-again');
 
-// Change to 'http://localhost:8080' if your C++ server runs on port 8080
+// Live C++ Server URL on Render
 const serverUrl = 'https://tic-tac-toe-game-t8wg.onrender.com';
 
 async function updateBoard() {
@@ -26,13 +26,7 @@ async function updateBoard() {
 
 async function makeMove(index) {
   try {
-    const response = await fetch(serverUrl + '/move', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: 'index=' + index
-    });
+    const response = await fetch(serverUrl + '/move?index=' + index);
     const data = await response.json();
     renderData(data);
   } catch (error) {
@@ -44,7 +38,7 @@ async function makeMove(index) {
 async function resetGame() {
   hideModal();
   try {
-    const response = await fetch(serverUrl + '/reset', { method: 'POST' });
+    const response = await fetch(serverUrl + '/reset');
     const data = await response.json();
     renderData(data);
   } catch (error) {
@@ -83,7 +77,7 @@ function hideModal() {
 function renderData(data) {
   // Update each cell with neon X or O glow
   cells.forEach((cell, index) => {
-    const mark = data.board[index] || '';
+    const mark = (data.board[index] || '').trim();
     cell.textContent = mark;
     cell.classList.remove('x', 'o');
 
